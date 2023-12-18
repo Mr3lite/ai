@@ -112,6 +112,15 @@ def execute_query(query, time_greeting):
         else:
             speak("Sorry, I didn't catch the song name.")
 
+    elif 'play on youtube' in query:
+        speak("Sure, what would you like me to play?")
+        vid = takeCommand()
+        if vid != "None":
+            speak(f"Playing {vid} on YouTube")
+            pywhatkit.playonyt(vid)
+        else:
+            speak("Sorry, I didn't catch the song name.")
+
     elif 'close the song' in query:
         speak("Closing the song.")
         close_browser_tab()
@@ -148,7 +157,7 @@ if __name__ == "__main__":
             current_time = datetime.datetime.now()
             difference = (current_time - last_interaction_time).seconds
 
-            if difference >= 60:  # Adjust the time limit as needed (60 seconds in this example)
+            if difference >= 30:  # Adjust the time limit as needed (60 seconds in this example)
                 speak("I'm going to sleep now.")
                 break
 
