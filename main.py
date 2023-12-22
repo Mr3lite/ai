@@ -103,14 +103,26 @@ def execute_query(query, time_greeting):
         print(f"Sir, the time is {strTime}")
         speak(f"Sir, the time is {strTime}")
 
+    elif 'jay shri ram' in query:
+        print(f"jai shri ram")
+        speak(f"jay shree raam")
+
     elif 'play song' in query:
         speak("Sure, what song would you like me to play?")
         song = takeCommand()
         if song != "None":
             speak(f"Playing {song} on YouTube")
             pywhatkit.playonyt(song)
+
+        elif sr.UnknownValueError:
+            print("Sorry, I didn't catch the song name. please say again")
+            speak("Sorry, I didn't catch the song name. please say again")
+            song = takeCommand()
+            speak(f"Playing {song} on YouTube")
+            pywhatkit.playonyt(song)
+
         else:
-            speak("Sorry, I didn't catch the song name.")
+            speak("please say for play again")
 
     elif 'play on youtube' in query:
         speak("Sure, what would you like me to play?")
@@ -118,8 +130,16 @@ def execute_query(query, time_greeting):
         if vid != "None":
             speak(f"Playing {vid} on YouTube")
             pywhatkit.playonyt(vid)
+        
+        elif sr.UnknownValueError:
+            print("Sorry, I didn't catch the video name.")
+            speak("Sorry, I didn't catch the video name.")
+            vid = takeCommand()
+            speak(f"Playing {vid} on YouTube")
+            pywhatkit.playonyt(vid)
+
         else:
-            speak("Sorry, I didn't catch the song name.")
+            speak("please say for play again")
 
     elif 'close the song' in query:
         speak("Closing the song.")
@@ -146,7 +166,7 @@ def execute_query(query, time_greeting):
         print("Command not recognized.")
         speak("Command not recognized.")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[1].id)
@@ -159,6 +179,7 @@ if __name__ == "__main__":
 
             if difference >= 30:  # Adjust the time limit as needed (60 seconds in this example)
                 speak("I'm going to sleep now.")
+                print("I'm going to sleep now.")
                 break
 
             query = takeCommand()
